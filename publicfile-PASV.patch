@@ -1,0 +1,20 @@
+--- ftpd.c.orig		Tue Nov  9 08:23:46 1999
++++ ftpd.c		Fri Sep 26 15:02:03 2003
+@@ -142,7 +142,7 @@
+ 
+   startlistening(x);
+ 
+-  out_puts("227 =");
++  out_puts("227 Entering Passive Mode (");
+   out_put(strnum,fmt_ulong(strnum,(unsigned long) x[0]));
+   out_puts(",");
+   out_put(strnum,fmt_ulong(strnum,(unsigned long) x[1]));
+@@ -154,7 +154,7 @@
+   out_put(strnum,fmt_ulong(strnum,(unsigned long) x[4]));
+   out_puts(",");
+   out_put(strnum,fmt_ulong(strnum,(unsigned long) x[5]));
+-  out_puts("\r\n");
++  out_puts(")\r\n");
+ }
+ 
+ int portparse(char *arg,unsigned char x[6])
