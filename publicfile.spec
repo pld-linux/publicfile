@@ -49,7 +49,7 @@ install httpd		$RPM_BUILD_ROOT%{_libdir}/%{name}/bin
 %pre
 if [ -n "`id -u ftplog`" ]; then
 	if [ "`id -u ftplog`" != "39" ]; then
-		echo "Warning: the group djbdns doesn't have gid=32. Correct this before installing djbdns" 1>&2
+		echo "Warning: the user ftplog doesn't have uid=39. Correct this before installing publicfile" 1>&2
 		exit 1
 	fi
 else
