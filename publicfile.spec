@@ -3,12 +3,15 @@ Summary(pl):	DJB Publicfile - serwery httpd i ftpd
 Name:		publicfile
 Version:	0.52
 Release:	1
-License:	http://cr.yp.to/distributors.html (free to use)
+License:	DJB (free to use, see http://cr.yp.to/distributors.html)
 Group:		Networking/Daemons
 Source0:	http://cr.yp.to/publicfile/%{name}-%{version}.tar.gz
 URL:		http://cr.yp.to/publicfile.html
-Requires:	ucspi-tcp
+Requires(pre):	/bin/id
+Requires(pre):	/usr/sbin/useradd
+Requires(postun):	/usr/sbin/userdel
 Requires:	daemontools
+Requires:	ucspi-tcp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -36,15 +39,19 @@ install httpd		$RPM_BUILD_ROOT%{_libdir}/%{name}/bin
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-##### ftplog user #####
 %pre
 if [ -n "`id -u ftplog`" ]; then
 	if [ "`id -u ftplog`" != "39" ]; then
-		echo "Warning: the user ftplog doesn't have uid=39. Correct this before installing publicfile" 1>&2
+		echo "Error: user ftplog doesn't have uid=39. Correct this before installing publicfile." 1>&2
 		exit 1
 	fi
 else
-	%{_sbindir}/useradd -u 39 -g ftp -s /dev/null ftplog
+	/usr/sbin/useradd -u 39 -g ftp -s /dev/null ftplog
+fi
+
+%postun
+if [ "$1" = "0" ]; then
+	/usr/sbin/userdel ftplog
 fi
 
 %files
