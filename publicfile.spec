@@ -21,6 +21,8 @@ Group(sv):	N‰tverk/Demoner
 Group(uk):	Ì≈“≈÷¡/‰≈ÕœŒ…
 Source0:	http://cr.yp.to/publicfile/%{name}-%{version}.tar.gz
 URL:		http://cr.yp.to/publicfile.html
+Requires:	ucspi-tcp
+Requires:	daemontools
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
