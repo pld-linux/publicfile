@@ -47,13 +47,13 @@ install httpd		$RPM_BUILD_ROOT%{_libdir}/%{name}/bin
 
 ##### ftplog user #####
 %pre
-if [ -n "`getgid ftplog`" ]; then
-	if [ "`getgid ftplog`" != "39" ]; then
+if [ -n "`id -u ftplog`" ]; then
+	if [ "`id -u ftplog`" != "39" ]; then
 		echo "Warning: the group djbdns doesn't have gid=32. Correct this before installing djbdns" 1>&2
 		exit 1
 	fi
 else
-	%{_sbindir}/groupadd -g 39 -r -f ftplog
+	%{_sbindir}/useradd -u 39 -g ftp -s /dev/null ftplog
 fi
 
 %files
