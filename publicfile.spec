@@ -10,11 +10,13 @@ Source0:	http://cr.yp.to/publicfile/%{name}-%{version}.tar.gz
 Patch0:		%{name}-glibc.patch
 Patch1:		%{name}-PASV.patch
 URL:		http://cr.yp.to/%{name}.html
+BuildRequires:	rpmbuild(macros) >= 1.159
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires:	daemontools
 Requires:	ucspi-tcp
+Provides:	user(ftplog)
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -118,13 +120,13 @@ ln -s ..%{_sysconfdir}/%{name}/httpd
 rm -rf $RPM_BUILD_ROOT
 
 %pre
-if [ -n "`id -u ftplog 2>/dev/null`" ]; then
-	if [ "`id -u ftplog`" != "39" ]; then
+if [ -n "`/bin/id -u ftplog 2>/dev/null`" ]; then
+	if [ "`/bin/id -u ftplog`" != "39" ]; then
 		echo "Error: user ftplog doesn't have uid=39. Correct this before installing publicfile." 1>&2
 		exit 1
 	fi
 else
-	/usr/sbin/useradd -u 39 -g ftp -s /dev/null ftplog
+	/usr/sbin/useradd -u 39 -g ftp -s /bin/false -d /usr/share/empty ftplog
 fi
 
 %preun
@@ -135,7 +137,7 @@ fi
 
 %postun
 if [ "$1" = "0" ]; then
-	/usr/sbin/userdel ftplog
+	%userremove ftplog
 fi
 
 %files
