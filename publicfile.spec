@@ -7,6 +7,7 @@ License:	DJB (free to use, see http://cr.yp.to/distributors.html)
 Group:		Networking/Daemons
 Source0:	http://cr.yp.to/publicfile/%{name}-%{version}.tar.gz
 # Source0-md5:	e493d69627b4fb2c7c764c0ff34330d7
+Patch0:		%{name}-glibc.patch
 URL:		http://cr.yp.to/publicfile.html
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
@@ -23,6 +24,7 @@ publicfile s³u¿y do publikacji plików przez protoko³y HTTP i FTP.
 
 %prep
 %setup -q
+%patch0
 
 %build
 echo %{__cc} %{rpmcflags} > conf-cc
