@@ -1,5 +1,5 @@
-Summary:	DJB Publicfile - httpd & ftpd servers.
-Summary(pl):	DJB Publicfile - serwery httpd i ftpd.
+Summary:	DJB Publicfile - httpd & ftpd servers
+Summary(pl):	DJB Publicfile - serwery httpd i ftpd
 Name:		publicfile
 Version:	0.52
 Release:	1
@@ -47,6 +47,9 @@ install configure	$RPM_BUILD_ROOT%{_libdir}/%{name}/bin
 install	ftpd		$RPM_BUILD_ROOT%{_libdir}/%{name}/bin
 install httpd		$RPM_BUILD_ROOT%{_libdir}/%{name}/bin
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 ##### ftplog user #####
 %pre
 if [ -n "`id -u ftplog`" ]; then
@@ -60,4 +63,4 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/
+%attr(755,root,root) %{_libdir}/%{name}
