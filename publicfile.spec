@@ -9,11 +9,11 @@ Source0:	http://cr.yp.to/publicfile/%{name}-%{version}.tar.gz
 # Source0-md5:	e493d69627b4fb2c7c764c0ff34330d7
 Patch0:		%{name}-glibc.patch
 Patch1:		%{name}-PASV.patch
-URL:		http://cr.yp.to/%{name}.html
+URL:		http://cr.yp.to/publicfile.html
 BuildRequires:	rpmbuild(macros) >= 1.202
+Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/useradd
-Requires(postun):	/usr/sbin/userdel
 Requires:	daemontools
 Requires:	ucspi-tcp
 Provides:	user(ftplog)
@@ -136,21 +136,21 @@ fi
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}
-%dir %attr(0755,root,root) %{_sysconfdir}/%{name}
+%dir %{_sysconfdir}/%{name}
 %dir %attr(3755,root,root) %{_sysconfdir}/%{name}/httpd
 %dir %attr(3755,root,root) %{_sysconfdir}/%{name}/ftpd
 %dir %attr(2755,root,root) %{_sysconfdir}/%{name}/httpd/log
 %dir %attr(2755,ftplog,ftp) %{_sysconfdir}/%{name}/httpd/log/main
 %attr(644,ftplog,ftp) %{_sysconfdir}/%{name}/httpd/log/status
 %dir %attr(2755,root,root) %{_sysconfdir}/%{name}/httpd/env
-%config %attr(644,root,root) %{_sysconfdir}/%{name}/httpd/env/*
+%config %{_sysconfdir}/%{name}/httpd/env/*
 %attr(755,root,root) %{_sysconfdir}/%{name}/httpd/run
 %attr(755,root,root) %{_sysconfdir}/%{name}/httpd/log/run
 %dir %attr(2755,root,root) %{_sysconfdir}/%{name}/ftpd/log
 %dir %attr(2755,ftplog,ftp) %{_sysconfdir}/%{name}/ftpd/log/main
 %attr(644,ftplog,ftp) %{_sysconfdir}/%{name}/ftpd/log/status
 %dir %attr(2755,root,root) %{_sysconfdir}/%{name}/ftpd/env
-%config %attr(644,root,root) %{_sysconfdir}/%{name}/ftpd/env/*
+%config %{_sysconfdir}/%{name}/ftpd/env/*
 %attr(755,root,root) %{_sysconfdir}/%{name}/ftpd/run
 %attr(755,root,root) %{_sysconfdir}/%{name}/ftpd/log/run
 %dir %attr(2755,root,root) /home/services/%{name}
