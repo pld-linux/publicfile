@@ -1,5 +1,5 @@
 Summary:	DJB Publicfile - httpd & ftpd servers
-Summary(pl):	DJB Publicfile - serwery httpd i ftpd
+Summary(pl.UTF-8):   DJB Publicfile - serwery httpd i ftpd
 Name:		publicfile
 Version:	0.52
 Release:	3
@@ -22,8 +22,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 publicfile supplies files to the public through HTTP and FTP.
 
-%description -l pl
-publicfile s≥uøy do publikacji plikÛw przez protoko≥y HTTP i FTP.
+%description -l pl.UTF-8
+publicfile s≈Çu≈ºy do publikacji plik√≥w przez protoko≈Çy HTTP i FTP.
 
 %prep
 %setup -q
