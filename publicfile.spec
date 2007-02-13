@@ -1,5 +1,5 @@
 Summary:	DJB Publicfile - httpd & ftpd servers
-Summary(pl.UTF-8):   DJB Publicfile - serwery httpd i ftpd
+Summary(pl.UTF-8):	DJB Publicfile - serwery httpd i ftpd
 Name:		publicfile
 Version:	0.52
 Release:	3
