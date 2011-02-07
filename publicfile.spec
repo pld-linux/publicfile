@@ -85,12 +85,15 @@ echo 127.0.0.1	>env/IP
 echo 21		>env/PORT
 echo 40		>env/MAXCONN
 
-cat>run<<___
+cat > run <<'EOF'
 #!/bin/sh
+CRNL="$(echo -e "\r\n.")"
+CRNL="${CRNL%.}"
 exec 2>&1
-exec envuidgid ftp softlimit -o20 -d50000 tcpserver -vDRHl0 -b20 -c\`cat env/MAXCONN\` -B'220 Features: a p .
-' \`cat env/IP\` \`cat env/PORT\` %{_libdir}/%{name}/bin/ftpd /home/services/%{name}
-___
+exec envuidgid ftp softlimit -o20 -d50000 tcpserver -vDRHl0 -b20 -c$(cat env/MAXCONN) \
+	-B"220 Features: a p .$CRNL" $(cat env/IP) $(cat env/PORT) \
+	%{_libdir}/%{name}/bin/ftpd /home/services/%{name}
+EOF
 
 cat>log/run<<___
 #!/bin/sh
